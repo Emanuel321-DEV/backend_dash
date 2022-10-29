@@ -20,9 +20,9 @@ export class UserController {
         return await this.userService.findALl()
     }
 
-    @Get(':id') // new ParseUUIDPipe === verifica se o id eh um UUID de fato, se nao for é retornado um erro
-    async findOneById(@Param('id') id: string ): Promise<CreateUserDTO> {
-        return await this.userService.findOneById(id);
+    @Get(':email')
+    async findOneById(@Param('email') email: string ): Promise<CreateUserDTO> {
+        return await this.userService.findOneByEmail(email);
     }
     
 }

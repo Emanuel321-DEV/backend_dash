@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { findAndFormatAddress } from 'src/helpers/findAndFormatAddress';
 import { Repository } from 'typeorm';
 import { CreateLocalDTO, UpdateLocalDTO } from './models/local.dtos';
 import { LocalEntity } from './models/local.entity';
@@ -12,11 +13,23 @@ export class LocalService {
     ){}
 
     async add(data: CreateLocalDTO): Promise<LocalEntity>{
-        const local = await this.localRepository.create(data);
-        return await this.localRepository.save(local);
+        const address = await findAndFormatAddress(data.cep, data.houseNumber);
+
+
+        const local = {
+            name: data.name,
+            company: data.company,
+            address: address
+        }
+
+
+        const createLocal = await this.localRepository.create(local);
+        return await this.localRepository.save(createLocal);
     }
 
     async listAll(): Promise<LocalEntity[]>{
+
+
         const local = await this.localRepository.find();
         return local;
     }
@@ -34,13 +47,21 @@ export class LocalService {
 
     async update(id: string, data: UpdateLocalDTO): Promise<LocalEntity>{
         
-        const local = await this.localRepository.findOneOrFail({
+        const localExists = await this.localRepository.findOneOrFail({
             where: { id } 
         });
 
-        await this.localRepository.merge(local, data);
+        const address = await findAndFormatAddress(data.cep, data.houseNumber);
 
-        return await this.localRepository.save(local)
+        const localData = {
+            name: data.name,
+            company: data.company,
+            address: address
+        }
+
+        await this.localRepository.merge(localExists, localData);
+
+        return await this.localRepository.save(localExists)
     }
 
 

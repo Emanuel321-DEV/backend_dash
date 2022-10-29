@@ -10,6 +10,7 @@ import { CompanyModule } from './company/company.module';
 import { LocalModule } from './local/local.module';
 import { ResponsibleModule } from './responsible/responsible.module';
 import { TicketModule } from './ticket/ticket.module';
+import { config } from 'dotenv';
 
 @Module({
   imports: [

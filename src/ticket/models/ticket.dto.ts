@@ -1,11 +1,9 @@
 import { IsNotEmpty } from "class-validator";
+import { LocalEntity } from "src/local/models/local.entity";
 
 export class CreateTicketDTO {
     
     @IsNotEmpty()
-    title: string;
-    
-    @IsNotEmpty()
     createdBy: string;
     
     @IsNotEmpty()
@@ -13,24 +11,12 @@ export class CreateTicketDTO {
 
     @IsNotEmpty()
     status: string;
+
+    @IsNotEmpty()
+    local: LocalEntity;
 
 }
 
-export class UpdateTicketDTO {
+export class UpdateTicketDTO extends CreateTicketDTO{
     
-    @IsNotEmpty()
-    id: string;
-
-    @IsNotEmpty()
-    title: string;
-    
-    @IsNotEmpty()
-    createdBy: string;
-    
-    @IsNotEmpty()
-    receivedBy: string;
-
-    @IsNotEmpty()
-    status: string;
-
 }

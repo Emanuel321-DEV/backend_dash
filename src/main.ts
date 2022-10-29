@@ -7,6 +7,7 @@ async function bootstrap() {
   app.useGlobalPipes(
     new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true})
   ) // Permite que estoure uma excecao caso a req der erro
+  console.log("BACKEND STARTED")
   await app.listen(3000);
 }
 bootstrap();

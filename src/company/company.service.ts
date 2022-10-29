@@ -41,7 +41,7 @@ export class CompanyService {
 
         await this.companyRepository.merge(company, data);
 
-        return await this.companyRepository.save(company)
+        return await this.companyRepository.save(company);
     }
 
 

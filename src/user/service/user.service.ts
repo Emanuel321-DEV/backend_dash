@@ -31,14 +31,16 @@ export class UserService {
         })
     }
 
-    async findOneById(id: string){
+    async findOneByEmail(email: string){
         try {
-            return await this.usersRepository.findOneOrFail({ where: {
-                id
-            }});
+            return await this.usersRepository.findOneOrFail({
+                where: {
+                    email
+                }
+            });
         }
         catch(error){
-            throw new NotFoundException(error.message)
+            throw new NotFoundException("EMAIL NOT FOUND")
         }
 
     }

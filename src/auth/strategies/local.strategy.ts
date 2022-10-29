@@ -2,26 +2,25 @@ import { Injectable, NotFoundException, UnauthorizedException } from "@nestjs/co
 import { PassportStrategy } from "@nestjs/passport";
 
 import { Strategy } from "passport-local";
-import { MessagesHelper } from "src/helpers/messages.helper";
+import { MessagesHelper } from "../../helpers/messages.helper";
 import { AuthService } from "../auth.service";
-
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy){
 
-    constructor (private readonly authService: AuthService)
-    {
-        super({ usernameField: 'email '}) // A validação com Strategy eh feita com username e senha por padrão, aqui usaremos email
-    }
+  constructor (private authService: AuthService)
+  {
+      super({ usernameField: 'email '}) // A validação com Strategy eh feita com username e senha por padrão, aqui usaremos email
+  }
 
-
-    async validate(email: string, password: string){
-        /* const user = await this.authService.validateUser(email, password);
-
-        if(!user) throw new UnauthorizedException(MessagesHelper.EMAIL_OR_PASSWORD_INVALID)
-
-        return user; */
-
+  async validate(email: string, password: string): Promise<any> {
+      const user = await this.authService.validateUser(email, password);;
+    
+      if (!user) {
+        throw new UnauthorizedException()
+      }
+    
+      return user
     }
 
 }
