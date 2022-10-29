@@ -1,8 +1,10 @@
-import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post, Put, Req, Res } from '@nestjs/common';
-import { CreateUserDTO } from '../models/user.dto';
-import { UserService } from '../service/user.service';
+import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post, Put, Req, Res, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import { CreateUserDTO } from './models/user.dto';
+import { UserService } from './user.service';
 
 @Controller('user')
+@UseGuards(AuthGuard('jwt'))
 export class UserController {
 
     constructor(

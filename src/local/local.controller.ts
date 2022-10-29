@@ -1,10 +1,11 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseUUIDPipe, Post, Put } from '@nestjs/common';
-import { UpdateResult } from 'typeorm';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseUUIDPipe, Post, Put, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { LocalService } from './local.service';
 import { CreateLocalDTO, UpdateLocalDTO } from './models/local.dtos';
 import { LocalEntity } from './models/local.entity';
 
 @Controller('local')
+@UseGuards(AuthGuard('jwt'))
 export class LocalController  {
     constructor(
         private readonly localService: LocalService

@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const apiCEP = axios.create({
-    baseURL: 'https://viacep.com.br/ws/'
+    baseURL: process.env.API_CEP_ENDPOINT
 })

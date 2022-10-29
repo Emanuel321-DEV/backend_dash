@@ -3,8 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { from, Observable } from 'rxjs';
 import {  Repository } from 'typeorm';
 import { runInThisContext } from 'vm';
-import { UserEntity } from '../models/user.entity';
-import { CreateUserDTO } from '../models/user.dto';
+import { UserEntity } from './models/user.entity';
+import { CreateUserDTO } from './models/user.dto';
 
 interface FindOneOptions {
     id ?: string;

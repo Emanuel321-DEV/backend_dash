@@ -10,7 +10,8 @@ import { CompanyModule } from './company/company.module';
 import { LocalModule } from './local/local.module';
 import { ResponsibleModule } from './responsible/responsible.module';
 import { TicketModule } from './ticket/ticket.module';
-import { config } from 'dotenv';
+import { JwtService } from '@nestjs/jwt';
+
 
 @Module({
   imports: [
@@ -33,6 +34,6 @@ import { config } from 'dotenv';
     TicketModule
   ],
   controllers: [AppController],
-  providers: [AppService, AuthService],
+  providers: [AppService, AuthService, JwtService],
 })
 export class AppModule {}

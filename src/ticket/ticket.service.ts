@@ -58,8 +58,8 @@ export class TicketService {
 
         const updateTicket = {
             ...ticket,
-            status: ticket.status,
-            receivedBy: ticket.receivedBy
+            status: data.status,
+            receivedBy: data.receivedBy
         }
 
         await this.ticketRepository.merge(ticket, updateTicket);

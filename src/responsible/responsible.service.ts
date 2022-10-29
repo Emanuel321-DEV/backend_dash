@@ -36,8 +36,6 @@ export class ResponsibleService{
             local: data.local
         }
             
-
-
         const createResponsible = await this.responsibleRepository.create(responsible);
 
         return await this.responsibleRepository.save(createResponsible);
@@ -67,7 +65,9 @@ export class ResponsibleService{
         const responsibleData = {
             name: data.name,
             telehpne: data.telephone,
-            address: address
+            address: address,
+            local: data.local ? data.local : responsibleAlreadyExists.local,
+            company: data.company ? data.company : responsibleAlreadyExists.company
         }
 
         await this.responsibleRepository.merge(responsibleAlreadyExists, responsibleData);

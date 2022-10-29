@@ -1,9 +1,11 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseUUIDPipe, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseUUIDPipe, Post, Put, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { CreateTicketDTO, UpdateTicketDTO } from './models/ticket.dto';
 import { TicketEntity } from './models/ticket.entity';
 import { TicketService } from './ticket.service';
 
 @Controller('ticket')
+@UseGuards(AuthGuard('jwt'))
 export class TicketController {
 
     constructor(
