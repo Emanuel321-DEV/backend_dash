@@ -30,7 +30,7 @@ export class LocalService {
     async listAll(): Promise<LocalEntity[]>{
 
 
-        const local = await this.localRepository.find();
+        const local =  await this.localRepository.find({relations: ['company']});
         return local;
     }
 
@@ -38,7 +38,8 @@ export class LocalService {
     async listOne(id: string): Promise<LocalEntity>{
         
         const local = await this.localRepository.findOneOrFail({
-            where: { id } 
+            where: { id },
+            relations: ['company']
         });
 
         return local;

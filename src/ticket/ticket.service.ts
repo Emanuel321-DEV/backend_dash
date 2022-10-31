@@ -38,7 +38,7 @@ export class TicketService {
     }
     
     async listAll(): Promise<TicketEntity[]> {
-        return await this.ticketRepository.find();
+        return  await this.ticketRepository.find({relations: ['local']});
     }
     
     async listOne(id: string): Promise<TicketEntity> {
@@ -52,7 +52,8 @@ export class TicketService {
     async update(id: string, data: UpdateTicketDTO): Promise<TicketEntity> {
         
         const ticket = await this.ticketRepository.findOneOrFail({
-            where: { id } 
+            where: { id },
+            relations: ['local']
         });
         
 

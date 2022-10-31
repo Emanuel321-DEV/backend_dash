@@ -44,12 +44,13 @@ export class ResponsibleService{
     }
     
     async listAll(): Promise<ResponsibleEntity[]> {
-        return await this.responsibleRepository.find();
+        return  await this.responsibleRepository.find({relations: ['company', 'local']});
     }
     
     async listOne(id: string): Promise<ResponsibleEntity> {
         const responsibleExists = await this.responsibleRepository.findOneOrFail({
-            where: { id } 
+            where: { id },
+            relations: ['company', 'local']
         });
 
         return responsibleExists;

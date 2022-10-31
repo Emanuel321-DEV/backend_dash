@@ -21,7 +21,7 @@ import { JwtService } from '@nestjs/jwt';
       username: 'postgres',
       password: 'docker',
       database: 'postgres',
-      // url: 'postgres://postgres:docker@postgres:5432/postgres', // Pegava do docker-compose
+      // url: process.env.DATABASE_URL, // Pegava do docker-compose
       autoLoadEntities: true,
       synchronize: true,
       entities: [__dirname + '/**/models/*.entity{.js, .ts}']
