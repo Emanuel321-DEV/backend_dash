@@ -27,11 +27,11 @@ export class ResponsibleEntity {
     updatedAt: string;
 
 
-    @ManyToOne(() => CompanyEntity, (company) => company.id)
-    company: CompanyEntity;
+    @ManyToOne(() => CompanyEntity, (company) => company.id, { cascade: true, onDelete: "CASCADE" })
+    company ?: CompanyEntity;
 
-    @ManyToOne(() => LocalEntity, (local) => local.id)
-    local: LocalEntity;
+    @ManyToOne(() => LocalEntity, (local) => local.id, { cascade: true, onDelete: "CASCADE" })
+    local ?: LocalEntity;
 
 
 }

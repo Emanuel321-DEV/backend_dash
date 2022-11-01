@@ -24,13 +24,13 @@ export class LocalEntity {
     @UpdateDateColumn({ name: "updated_at"})
     updatedAt: string;
 
-    @ManyToOne(() => CompanyEntity, (company) => company.id)
+    @ManyToOne(() => CompanyEntity, (company) => company.id, { cascade: true, onDelete: "CASCADE" } )
     company: CompanyEntity;
 
-    @OneToMany((type) => ResponsibleEntity, (responsible) =>  responsible)
+    @OneToMany((type) => ResponsibleEntity, (responsible) =>  responsible, { cascade: true, onDelete: "CASCADE" })
     responsible: ResponsibleEntity[];
 
-    @OneToMany((type) => TicketEntity, (ticket) =>  ticket)
+    @OneToMany((type) => TicketEntity, (ticket) =>  ticket, { cascade: true, onDelete: "CASCADE"})
     ticket: TicketEntity[];
 
 

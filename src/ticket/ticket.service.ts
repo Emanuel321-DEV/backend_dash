@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { LocalService } from 'src/local/local.service';
 import { ResponsibleEntity } from 'src/responsible/models/responsible.entity';
 import { Repository, UpdateResult } from 'typeorm';
 import { CreateTicketDTO, UpdateTicketDTO } from './models/ticket.dto';
@@ -10,15 +11,18 @@ export class TicketService {
     
     constructor(
         @InjectRepository(TicketEntity)
-        private readonly ticketRepository: Repository<TicketEntity>
+        private readonly ticketRepository: Repository<TicketEntity>,
+
+        private readonly localService: LocalService
     ){}
 
     
     async add(data: CreateTicketDTO): Promise<TicketEntity> {
 
+        console.log("recebi este data", data)
 
         const ticket = {
-            title: data.local.name,
+            title: '',
             createdBy: data.createdBy,
             receivedBy: data.receivedBy,
             status: data.status,
@@ -27,12 +31,13 @@ export class TicketService {
 
         const createTicket = await this.ticketRepository.create(ticket);
 
+        const local = await this.localService.listOne(String(createTicket.local))        
+        
         const ticketUpdate = {
             ...createTicket,
-            title: `${createTicket.title} - ${createTicket.id} `
+            title: `${local.id} - ${local.name} `
         };
-
-
+        
         return await this.ticketRepository.save(ticketUpdate);
 
     }

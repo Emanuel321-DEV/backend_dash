@@ -14,6 +14,7 @@ export class CompanyService {
 
     async add(data: CreateCompanyDTO): Promise<CompanyEntity>{
         const company = await this.companyRepository.create(data);
+
         return await this.companyRepository.save(company);
     }
 

@@ -15,16 +15,6 @@ export class ResponsibleService{
     
     
     async add(data: CreateResponsibleDTO): Promise<ResponsibleEntity> {
-        
-        const telephoneAlreadyExists = this.responsibleRepository.findOne({
-            where: {
-                telephone: data.telephone
-            }
-        })
-
-        if(telephoneAlreadyExists){
-            throw new Error("Telephone already exists. ")
-        }
 
         const address = await findAndFormatAddress(data.cep, data.houseNumber);
 

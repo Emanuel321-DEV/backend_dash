@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { findAndFormatAddress } from 'src/helpers/findAndFormatAddress';
+import { TicketService } from 'src/ticket/ticket.service';
 import { Repository } from 'typeorm';
 import { CreateLocalDTO, UpdateLocalDTO } from './models/local.dtos';
 import { LocalEntity } from './models/local.entity';
@@ -9,7 +10,7 @@ import { LocalEntity } from './models/local.entity';
 export class LocalService {
     constructor(
         @InjectRepository(LocalEntity)
-        private readonly localRepository: Repository<LocalEntity>
+        private readonly localRepository: Repository<LocalEntity>,
     ){}
 
     async add(data: CreateLocalDTO): Promise<LocalEntity>{
@@ -61,6 +62,9 @@ export class LocalService {
         }
 
         await this.localRepository.merge(localExists, localData);
+
+
+        // this.ticketService.add({createdBy: '', receivedBy: '', status: '', local: localExists);
 
         return await this.localRepository.save(localExists)
     }

@@ -17,10 +17,10 @@ export class CreateResponsibleDTO {
     houseNumber: string;
 
     @IsOptional()
-    company: CompanyEntity;
+    company ?: CompanyEntity;
 
     @IsOptional()
-    local: LocalEntity;
+    local ?: LocalEntity;
 
 
 }

@@ -27,10 +27,10 @@ export class CompanyEntity {
     @UpdateDateColumn({ name: "updated_at"})
     updatedAt: string;
 
-    @OneToMany((type) => ResponsibleEntity, (responsible) =>  responsible)
+    @OneToMany((type) => ResponsibleEntity, (responsible) =>  responsible, { cascade: true, onDelete: "CASCADE" })
     responsible: ResponsibleEntity[];
 
-    @OneToMany((type) => LocalEntity, (local) =>  local)
+    @OneToMany((type) => LocalEntity, (local) =>  local, { cascade: true, onDelete: "CASCADE" })
     local: LocalEntity[];
 
 }

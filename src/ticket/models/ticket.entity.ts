@@ -28,7 +28,7 @@ export class TicketEntity {
     @UpdateDateColumn({ name: "updated_at"})
     updatedAt: string;
 
-    @ManyToOne(() => LocalEntity, (local) => local.id)
+    @ManyToOne(() => LocalEntity, (local) => local.id, { cascade: true, onDelete: "CASCADE"} )
     local: LocalEntity;
 
     
