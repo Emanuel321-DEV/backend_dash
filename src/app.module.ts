@@ -18,7 +18,8 @@ import { JwtService } from '@nestjs/jwt';
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      url: process.env.DATABASE_URL, // Pegava do docker-compose
+      url: process.env.DATABASE_URL, // Pegava do docker-compose,
+      ssl: { rejectUnauthorized: false},
       autoLoadEntities: true,
       synchronize: true,
       entities: [__dirname + '/**/models/*.entity{.js, .ts}']
