@@ -64,6 +64,7 @@ export class TicketService {
 
         const updateTicket = {
             ...ticket,
+            createdBy: data.createdBy,
             status: data.status,
             receivedBy: data.receivedBy
         }
