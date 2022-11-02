@@ -37,6 +37,7 @@ export async function findAndFormatAddress (cep: string, homeNumber: string): Pr
     
     
     } catch(error){
+        console.log("FORMAT ADDRESS ERROR", error)
         throw new Error(error);
     }
 

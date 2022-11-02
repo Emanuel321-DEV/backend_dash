@@ -14,18 +14,24 @@ export class LocalService {
     ){}
 
     async add(data: CreateLocalDTO): Promise<LocalEntity>{
-        const address = await findAndFormatAddress(data.cep, data.houseNumber);
-
-
-        const local = {
-            name: data.name,
-            company: data.company,
-            address: address
+        
+        try {
+            const address = await findAndFormatAddress(data.cep, data.houseNumber);
+            
+            const local = {
+                name: data.name,
+                company: data.company,
+                address: address
+            }
+    
+    
+            const createLocal = await this.localRepository.create(local);
+            return await this.localRepository.save(createLocal);
+        } catch(error){
+            console.log(error)
         }
 
 
-        const createLocal = await this.localRepository.create(local);
-        return await this.localRepository.save(createLocal);
     }
 
     async listAll(): Promise<LocalEntity[]>{
