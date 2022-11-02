@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { findAndFormatAddress } from 'src/helpers/findAndFormatAddress';
-import { TicketService } from 'src/ticket/ticket.service';
 import { Repository } from 'typeorm';
 import { CreateLocalDTO, UpdateLocalDTO } from './models/local.dtos';
 import { LocalEntity } from './models/local.entity';
